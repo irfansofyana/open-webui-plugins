@@ -1,6 +1,6 @@
 # Open WebUI Plugins
 
-> Personal curated collection of [Open WebUI](https://openwebui.com) plugins — filters, tools, pipes, and actions that extend the chat experience.
+> Personal curated collection of [Open WebUI](https://openwebui.com) plugins and skills — filters, tools, pipes, actions, and markdown instruction sets that extend the chat experience.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Open WebUI](https://img.shields.io/badge/Open%20WebUI-%E2%89%A50.5.0-7c3aed.svg)](https://docs.openwebui.com)
@@ -13,6 +13,18 @@
 | Name | Description | Source |
 |---|---|---|
 | [Caveman](filters/caveman) | Terse caveman communication mode. Cuts response tokens ~65–75% while keeping technical accuracy. 6 intensity levels, auto-clarity safety, per-chat toggle. | [caveman.py](filters/caveman/caveman.py) |
+| [Stop Slop](filters/stop-slop) | Removes predictable AI writing patterns from prose. Stop Slop rules, per-chat toggle, and optional output audit. | [stop-slop.py](filters/stop-slop/stop-slop.py) |
+
+### Skills
+| Name | Description | Source |
+|---|---|---|
+| [Stop Slop](skills/stop-slop.md) | Single-file Open WebUI Skill version of Stop Slop with merged references and examples. | [stop-slop.md](skills/stop-slop.md) |
+
+### Skill or Filter?
+
+For Stop Slop, use the **Skill** when you want plain Markdown instructions invoked with `$`, enabled through **+ → Skills**, or attached to a model. Use the **Filter** when you want Function behavior: chat-chip visibility, admin valves, prompt injection, and optional output audit/status.
+
+Do not enable both for the same chat/model unless you intentionally want duplicate Stop Slop instructions.
 
 ### Tools
 *(none yet)*
@@ -33,8 +45,9 @@
 | **Pipe** | Custom model. Receives request body, returns a response. Used for proxying external APIs, manifold models, or fully custom logic. | Workspace → Functions |
 | **Action** | Adds a button to the chat message toolbar. Click → run custom code with access to the event system. | Workspace → Functions |
 | **Tool** | Function the LLM can call. Type hints auto-generate JSON schema. Attached per-model. | Workspace → Tools |
+| **Skill** | Plain Markdown instruction set the model can read. Invoked with `$`, toggled per chat, or attached to models. | Workspace → Skills |
 
-For deeper detail, see the official [Open WebUI plugin docs](https://docs.openwebui.com/features/extensibility/plugin/).
+For deeper detail, see the official [Open WebUI plugin docs](https://docs.openwebui.com/features/extensibility/plugin/) and [Skills docs](https://docs.openwebui.com/features/workspace/skills).
 
 ---
 
@@ -44,7 +57,13 @@ For deeper detail, see the official [Open WebUI plugin docs](https://docs.openwe
 1. Open the plugin's `.py` file in this repo, copy the full contents.
 2. In Open WebUI, go to **Workspace → Functions** (for filters/pipes/actions) or **Workspace → Tools** (for tools).
 3. Click **+ New Function** / **+ New Tool**, paste the code, save.
-4. Toggle on. Filters appear as chips in the chat input; tools attach per-model.
+4. Enable the Function. Filters with `self.toggle = True` appear as chat chips / Integrations entries; tools attach per model.
+
+### Quick install (skills)
+1. Open the skill's `.md` file, download it, or copy the content.
+2. In Open WebUI, go to **Workspace → Skills**.
+3. Click **Import** for `.md`, or create a new skill and paste the markdown content.
+4. Invoke with `$`, enable through **+ → Skills**, or attach to a model.
 
 ### Per-plugin configuration
 Every plugin has its own `README.md` covering:
@@ -67,6 +86,7 @@ open-webui-plugins/
 ├── tools/        # LLM-callable functions with auto-generated schemas
 ├── pipes/        # custom models / proxies
 ├── actions/      # message-toolbar buttons
+├── skills/       # plain Markdown Open WebUI Skills
 ├── LICENSE
 └── README.md
 ```
