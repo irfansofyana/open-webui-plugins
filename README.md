@@ -13,6 +13,7 @@
 | Name | Description | Source |
 |---|---|---|
 | [Caveman](filters/caveman) | Terse caveman communication mode. Cuts response tokens ~65–75% while keeping technical accuracy. 6 intensity levels, auto-clarity safety, per-chat toggle. | [caveman.py](filters/caveman/caveman.py) |
+| [Smart Context Compactor](filters/smart-context-compactor) | Keeps long chats usable by trimming older context or summarizing middle turns before model requests exceed the context window. Model budget mapping, trim fallback, optional semantic summary. | [smart-context-compactor.py](filters/smart-context-compactor/smart-context-compactor.py) |
 | [Stop Slop](filters/stop-slop) | Removes predictable AI writing patterns from prose. Stop Slop rules, per-chat toggle, and optional output audit. | [stop-slop.py](filters/stop-slop/stop-slop.py) |
 
 ### Skills
